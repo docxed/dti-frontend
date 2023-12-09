@@ -1,4 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
+import th from 'vuetify/es5/locale/th'
+import en from 'vuetify/es5/locale/en'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -24,7 +26,15 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '~/plugins/rules.js',
+    '~/plugins/v-mask.js',
+    '~/plugins/toast.js',
+    '~/plugins/axios.js',
+    '~/plugins/vuetify.js',
+    '~/plugins/currency.js',
+    '~/plugins/quill-editor-viewer.js',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -33,6 +43,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/google-fonts',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -46,31 +57,97 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: process.env.NUXT_ENV_BASE_URL,
+  },
+
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: process.env.NUXT_ENV_BASE_URL,
+    },
+    contact_email: process.env.NUXT_ENV_CONTACT_EMAIL,
+    contact_password: process.env.NUXT_ENV_CONTACT_PASSWORD,
+    baseURL: process.env.NUXT_ENV_BASE_URL,
+    node_env: process.env.NODE_ENV,
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        scheme: 'refresh', // Refresh scheme
+        redirect: false, // Disable redirect
+        token: {
+          property: 'access_token',
+          global: true, // Use global token
+          required: true, // Required token
+          type: 'Bearer',
+          maxAge: 24 * 60 * 60, // 24 hours
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 7 * 24 * 60 * 60, // 7 days
+        },
+        user: {
+          property: false, // <--- Default "user"
+          autoFetch: true, // <--- Default "true" (Fetch user info on login)
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post' },
+          refresh: { url: '/auth/refresh-token', method: 'post' },
+          user: { url: '/auth/me', method: 'get' },
+        },
+      },
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          primary: colors.purple.darken1,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          success: colors.green.darken1,
+          background: colors.grey.darken4,
+        },
+        light: {
+          primary: colors.purple.darken1,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.darken1,
+          background: colors.grey.lighten4,
+          foreground: '#ffffff',
         },
       },
+    },
+    lang: {
+      locales: { en, th },
+      current: 'th',
+    },
+  },
+
+  googleFonts: {
+    families: {
+      ['Noto Sans Thai']: true,
     },
   },
 
   moment: {
     locales: ['th'],
     defaultLocale: 'th',
+  },
+
+  router: {
+    middleware: ['auth', 'route'],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
