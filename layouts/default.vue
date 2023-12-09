@@ -33,7 +33,7 @@
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-chip v-bind="attrs" v-on="on" class="ml-2" light v-if="$vuetify.breakpoint.xsOnly">
-            <v-icon left>mdi-account</v-icon> <v-icon right>mdi-menu-down</v-icon>
+            <v-icon left>mdi-account-details</v-icon>
           </v-chip>
           <v-chip v-bind="attrs" v-on="on" class="ml-2" light v-else>
             <v-icon left>mdi-account-circle</v-icon> <strong>{{ $auth.user.fullname }}</strong>
