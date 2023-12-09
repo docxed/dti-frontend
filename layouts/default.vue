@@ -57,6 +57,14 @@
               <v-list-item-title>ข้อมูลส่วนตัว</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item @click="dialogChangePassword = true">
+            <v-list-item-icon>
+              <v-icon>mdi-lock-reset</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>เปลี่ยนรหัสผ่าน</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item @click="logout()">
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
@@ -72,6 +80,9 @@
       <v-container>
         <dialog-form :value.sync="dialogEditUser" title="ข้อมูลส่วนตัว">
           <user-form @close="dialogEditUser = false" />
+        </dialog-form>
+        <dialog-form :value.sync="dialogChangePassword" title="เปลี่ยนรหัสผ่าน">
+          <user-changepassword-form @close="dialogChangePassword = false" />
         </dialog-form>
         <Nuxt />
       </v-container>
@@ -106,6 +117,7 @@ export default {
       rightDrawer: false,
       title: 'Digital Intelligence Test',
       dialogEditUser: false,
+      dialogChangePassword: false,
     }
   },
   methods: {

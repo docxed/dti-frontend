@@ -18,7 +18,7 @@
         </v-btn>
       </v-toolbar>
       <v-card-text class="mt-5">
-        <slot />
+        <slot v-if="value" />
       </v-card-text>
     </v-card>
   </v-dialog>

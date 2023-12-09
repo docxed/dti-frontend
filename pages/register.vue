@@ -182,7 +182,7 @@ export default {
       if (this.$refs.form.validate()) {
         try {
           this.loading = true
-          await this.$axios.$post('/auth/register', this.form)
+          await this.$axios.post('/auth/register', this.form)
           this.$toast.success('ลงทะเบียนสำเร็จ')
           this.$router.push('/login')
         } catch (err) {
