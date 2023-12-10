@@ -48,12 +48,17 @@
             </v-row>
             <v-row justify="end">
               <v-col class="text-right">
-                <v-btn text> <v-icon left> mdi-lock-question </v-icon>ลืมรหัสผ่าน</v-btn>
+                <v-btn text @click="dialogResetPassword = true">
+                  <v-icon left> mdi-lock-question </v-icon>ลืมรหัสผ่าน</v-btn
+                >
               </v-col>
             </v-row>
           </v-form>
         </v-card-text>
       </v-card>
+      <dialog-form :value.sync="dialogResetPassword" title="ลืมรหัสผ่าน">
+        <user-resetpassword-form @close="dialogResetPassword = false" />
+      </dialog-form>
     </v-col>
   </v-row>
 </template>
@@ -75,6 +80,7 @@ export default {
       },
       valid: null,
       show1: false,
+      dialogResetPassword: false,
     }
   },
   methods: {
