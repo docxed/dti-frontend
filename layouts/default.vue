@@ -1,5 +1,13 @@
 <template>
-  <v-app dark>
+  <v-app
+    dark
+    :style="{
+      background: $vuetify.theme.themes[theme].background,
+      color: $vuetify.theme.themes[theme].foreground,
+      // text color
+      fontColor: $vuetify.theme.themes[theme].fontColor,
+    }"
+  >
     <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <v-list>
         <v-list-item
@@ -119,6 +127,11 @@ export default {
       dialogEditUser: false,
       dialogChangePassword: false,
     }
+  },
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ? 'dark' : 'light'
+    },
   },
   methods: {
     async logout() {
