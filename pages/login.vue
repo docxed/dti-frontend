@@ -38,7 +38,12 @@
             </v-checkbox>
             <v-row justify="center" class="mt-3">
               <v-col cols="12" sm="4">
-                <v-btn block color="primary" type="submit" :disabled="valid === false"
+                <v-btn
+                  block
+                  color="primary"
+                  type="submit"
+                  :loading="loading"
+                  :disabled="valid === false"
                   >เข้าสู่ระบบ</v-btn
                 >
               </v-col>
@@ -78,6 +83,7 @@ export default {
         password: '',
         consent: false,
       },
+      loading: false,
       valid: null,
       show1: false,
       dialogResetPassword: false,
@@ -87,6 +93,7 @@ export default {
     async submit() {
       if (this.$refs.form.validate()) {
         try {
+          this.loading = true
           await this.$auth.loginWith('local', {
             data: {
               email: this.form.email,
@@ -101,6 +108,8 @@ export default {
         } catch (error) {
           console.log(error)
           this.form.password = ''
+        } finally {
+          this.loading = false
         }
       }
     },

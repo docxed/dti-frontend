@@ -92,6 +92,8 @@
         <dialog-form :value.sync="dialogChangePassword" title="เปลี่ยนรหัสผ่าน">
           <user-changepassword-form @close="dialogChangePassword = false" />
         </dialog-form>
+        <dialog-confirm />
+        <utils-loader />
         <Nuxt />
       </v-container>
     </v-main>

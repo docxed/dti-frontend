@@ -34,6 +34,7 @@ export default {
     '~/plugins/vuetify.js',
     '~/plugins/currency.js',
     '~/plugins/quill-editor-viewer.js',
+    '~/plugins/loader.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

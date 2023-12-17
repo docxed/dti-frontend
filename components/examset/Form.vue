@@ -49,12 +49,13 @@
         />
       </v-col>
     </v-row>
+    <v-switch :label="form.is_published ? 'เปิดใช้งาน' : 'ปิดใช้งาน'" v-model="form.is_published" />
     <v-row>
       <v-col>
         <v-btn block @click="$emit('close')">ยกเลิก</v-btn>
       </v-col>
       <v-col>
-        <v-btn block color="success" type="submit">บันทึก</v-btn>
+        <v-btn block color="success" type="submit" :loading="loading">บันทึก</v-btn>
       </v-col>
     </v-row>
   </v-form>
@@ -64,6 +65,7 @@ export default {
   data() {
     return {
       valid: false,
+      loading: false,
       form: {
         title: '',
         description: '',
@@ -71,12 +73,25 @@ export default {
         max_attempt: 3,
         is_password: false,
         password: '',
+        is_published: false,
       },
     }
   },
   methods: {
     async submit() {
-      if (this.$refs.form.validate()) {
+      if (!this.form.description) {
+        return this.$toast.warning('กรุณากรอกข้อมูลให้ครบถ้วน')
+      } else if (this.$refs.form.validate()) {
+        try {
+          this.loading = true
+          const { data } = await this.$axios.post('/examset', this.form)
+          this.$emit('on-create', data)
+          this.$toast.success('บันทึกข้อมูลสำเร็จ')
+          this.$emit('close')
+        } catch (err) {
+        } finally {
+          this.loading = false
+        }
       }
     },
   },

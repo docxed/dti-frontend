@@ -15,6 +15,10 @@ export default function ({ $axios, redirect }) {
       Vue.$toast.error('กรุณาเข้าสู่ระบบใหม่อีกครั้ง')
     } else if (statusCode === 500) {
       Vue.$toast.error('เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้ง')
+    } else if (statusCode === 403) {
+      Vue.$toast.error('คุณไม่มีสิทธิ์ใช้งานส่วนนี้')
+    } else if (statusCode === 404) {
+      Vue.$toast.error('ไม่พบข้อมูลที่คุณต้องการ')
     }
   })
 }

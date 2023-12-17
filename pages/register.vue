@@ -84,7 +84,11 @@
                   <v-select v-model="form.gender" :items="genderItem" label="เพศ" />
                 </v-col>
                 <v-col cols="6" sm="5">
-                  <form-date-field :value.sync="form.birthday" @input="form.birthday = $event" />
+                  <form-date-field
+                    :value.sync="form.birthday"
+                    @input="form.birthday = $event"
+                    label="วันเกิด"
+                  />
                 </v-col>
                 <v-col cols="6" sm="5">
                   <v-text-field

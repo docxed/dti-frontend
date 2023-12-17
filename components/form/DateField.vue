@@ -16,6 +16,8 @@
         prepend-icon="mdi-calendar"
         readonly
         :filled="filled"
+        clearable
+        @click:clear="$emit('input', null)"
       />
     </template>
     <v-date-picker
@@ -52,6 +54,10 @@ export default {
     filled: {
       type: Boolean,
       default: false,
+    },
+    clearable: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
