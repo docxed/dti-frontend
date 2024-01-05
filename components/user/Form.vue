@@ -7,6 +7,12 @@
       label="อีเมล"
       disabled
     />
+    <v-text-field
+      v-model="form.dq_score"
+      type="number"
+      :rules="[$rules.required_zero_allow, $rules.number]"
+      label="คะแนนระดับความฉลาดทางดิจิทัล DQ"
+    />
     <v-row>
       <v-col cols="12" sm="2">
         <v-select
@@ -42,15 +48,19 @@
         <v-select v-model="form.gender" :items="genderItem" label="เพศ" />
       </v-col>
       <v-col cols="6" sm="5">
-        <form-date-field :value.sync="form.birthday" @input="form.birthday = $event" />
+        <form-date-field
+          :value.sync="form.birthday"
+          @input="form.birthday = $event"
+          :max="new Date().toISOString().substr(0, 10)"
+          label="วันเกิด"
+        />
       </v-col>
       <v-col cols="6" sm="5">
         <v-text-field
           v-model="form.phone"
-          :rules="[$rules.maxlength(20)]"
+          :rules="[$rules.maxlength(10), $rules.phone]"
           prepend-icon="mdi-phone"
           label="มือถือ"
-          v-mask="'(###) ###-####'"
         />
       </v-col>
     </v-row>
@@ -82,6 +92,7 @@ export default {
   data() {
     return {
       form: {
+        dq_score: 0,
         prefix: 'นาย',
         firstname: '',
         lastname: '',

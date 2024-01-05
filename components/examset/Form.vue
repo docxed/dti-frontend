@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="form" v-model="valid" @submit.prevent="submit()" lazy-validation>
+  <v-form ref="form" v-model="valid" @submit.prevent="onSubmit()" lazy-validation>
     <v-text-field v-model="form.title" :rules="[$rules.required]" label="ชื่อแบบทดสอบ" filled />
     <v-row>
       <v-col>
@@ -62,6 +62,21 @@
 </template>
 <script>
 export default {
+  props: {
+    isUpdate: {
+      type: Boolean,
+      default: false,
+    },
+    updateItem: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  mounted() {
+    if (this.isUpdate) {
+      this.setItem()
+    }
+  },
   data() {
     return {
       valid: false,
@@ -78,20 +93,50 @@ export default {
     }
   },
   methods: {
-    async submit() {
+    onSubmit() {
       if (!this.form.description) {
         return this.$toast.warning('กรุณากรอกข้อมูลให้ครบถ้วน')
       } else if (this.$refs.form.validate()) {
-        try {
-          this.loading = true
-          const { data } = await this.$axios.post('/examset', this.form)
-          this.$emit('on-create', data)
-          this.$toast.success('บันทึกข้อมูลสำเร็จ')
-          this.$emit('close')
-        } catch (err) {
-        } finally {
-          this.loading = false
+        if (this.isUpdate) {
+          this.update()
+        } else {
+          this.submit()
         }
+      }
+    },
+    async update() {
+      try {
+        this.loading = true
+        const { data } = await this.$axios.put(`/examset/${this.updateItem.id}`, this.form)
+        this.$emit('on-update', data)
+        this.$toast.success('บันทึกข้อมูลสำเร็จ')
+        this.$emit('close')
+      } catch (err) {
+      } finally {
+        this.loading = false
+      }
+    },
+    async submit() {
+      try {
+        this.loading = true
+        const { data } = await this.$axios.post('/examset', this.form)
+        this.$emit('on-create', data)
+        this.$toast.success('บันทึกข้อมูลสำเร็จ')
+        this.$emit('close')
+      } catch (err) {
+      } finally {
+        this.loading = false
+      }
+    },
+    setItem() {
+      this.form = {
+        title: this.updateItem.title,
+        description: this.updateItem.description,
+        time: this.updateItem.time,
+        max_attempt: this.updateItem.max_attempt,
+        is_password: this.updateItem.is_password,
+        password: this.updateItem.password,
+        is_published: this.updateItem.is_published,
       }
     },
   },

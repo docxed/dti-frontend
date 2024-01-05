@@ -13,6 +13,16 @@
               counter="100"
               label="อีเมล"
             />
+            <v-text-field
+              v-model="form.dq_score"
+              type="number"
+              :rules="[$rules.required_zero_allow, $rules.number]"
+              label="คะแนนระดับความฉลาดทางดิจิทัล DQ"
+            />
+            <p class="text-caption">
+              คะแนนระดับความฉลาดทางดิจิทัล <b>DQ</b> สามารถตรวจสอบได้ที่
+              <a href="https://dqassessment.com/th/home" target="_blank">คลิก</a>
+            </p>
             <v-row>
               <v-col cols="12" sm="2">
                 <v-select
@@ -87,16 +97,16 @@
                   <form-date-field
                     :value.sync="form.birthday"
                     @input="form.birthday = $event"
+                    :max="new Date().toISOString().substr(0, 10)"
                     label="วันเกิด"
                   />
                 </v-col>
                 <v-col cols="6" sm="5">
                   <v-text-field
                     v-model="form.phone"
-                    :rules="[$rules.maxlength(20)]"
+                    :rules="[$rules.maxlength(10), $rules.phone]"
                     prepend-icon="mdi-phone"
                     label="มือถือ"
-                    v-mask="'(###) ###-####'"
                   />
                 </v-col>
               </v-row>
@@ -153,11 +163,11 @@ export default {
       title: 'ลงทะเบียน',
     }
   },
-
   data() {
     return {
       form: {
         email: '',
+        dq_score: 0,
         prefix: 'นาย',
         firstname: '',
         lastname: '',
@@ -174,7 +184,7 @@ export default {
       valid: null,
       show1: false,
       show2: false,
-      prefixItem: PREFIX,
+      prefixItem: PREFIX.filter((item) => item !== 'นาง'),
       genderItem: GENDER,
       addressTHItem: AddressTH,
       isMore: false,

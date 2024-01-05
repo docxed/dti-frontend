@@ -7,6 +7,7 @@ export default (context, inject) => {
       !v ||
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(v) ||
       'รหัสผ่านจะต้องมี 8 ตัวขึ้นไป เป็นตัวอักษรผสมตัวเลข',
+    phone: (v) => /^0[0-9]{9}$/.test(v) || 'รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง',
     array_required: (v) => v.length > 0 || 'ต้องกรอก',
     required_zero_allow: (v) => v === 0 || !!v || 'ต้องกรอก',
     numeric: (v) => !isNaN(v) || 'กรอกตัวเลข',

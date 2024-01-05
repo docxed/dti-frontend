@@ -117,7 +117,7 @@ export default {
         },
         {
           icon: 'mdi-file-document-multiple',
-          title: 'ชุดแบบทดสอบ',
+          title: 'จัดการชุดแบบทดสอบ',
           to: '/examset',
           groups: ['แอดมิน'],
         },

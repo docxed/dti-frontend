@@ -43,18 +43,12 @@
           <v-btn icon small @click="$router.push(`/examset/${item.id}`)"
             ><v-icon>mdi-information</v-icon></v-btn
           >
-          <v-btn icon small @click="deleteItem(item)"><v-icon>mdi-delete</v-icon></v-btn>
         </td>
       </template>
     </utils-base-report>
 
     <dialog-form :value.sync="dialogCreate" title="สร้างชุดแบบทดสอบ">
-      <examset-form
-        :headers="headers"
-        :items="items"
-        @on-create="items.unshift($event)"
-        @close="dialogCreate = false"
-      />
+      <examset-form @on-create="items.unshift($event)" @close="dialogCreate = false" />
     </dialog-form>
   </div>
 </template>
