@@ -23,7 +23,6 @@
         <v-btn block color="success" type="submit" :loading="loading">บันทึก</v-btn>
       </v-col>
     </v-row>
-    <pre>{{ form }}</pre>
   </v-form>
 </template>
 <script>

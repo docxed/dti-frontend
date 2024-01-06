@@ -128,7 +128,11 @@ export default {
       try {
         this.loading = true
         const { data } = await this.$axios.get('/examset', {
-          params: this.searchFrom,
+          params: {
+            start_date: this.searchFrom.start_date,
+            end_date: this.searchFrom.end_date,
+            del_flag: this.searchFrom.del_flag,
+          },
         })
         this.items = data
       } catch (err) {

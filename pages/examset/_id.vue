@@ -8,6 +8,7 @@
       <v-card-text>
         <p><strong>รายละเอียด</strong> <v-quill-viewer :data="item.description" /></p>
         <p><strong>เวลาทำ</strong> {{ item.time }} นาที</p>
+        <p><strong>จำนวนครั้งที่สามารถทำได้</strong> {{ item.max_attempt }} ครั้ง</p>
         <p><strong>รหัสผ่าน</strong> {{ item.is_password ? item.password : '-' }}</p>
         <p>
           <strong>สถานะ</strong>
@@ -41,7 +42,9 @@
             </v-card-text>
           </v-card>
         </v-tab-item>
-        <v-tab-item key="student"></v-tab-item>
+        <v-tab-item key="student">
+          <examsetitem-student-list :examsetId="this.$route.params.id" />
+        </v-tab-item>
         <v-tab-item key="teacher"></v-tab-item>
       </v-tabs-items>
     </v-card>

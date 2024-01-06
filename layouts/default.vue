@@ -116,6 +116,18 @@ export default {
           groups: ['แอดมิน', 'ครู', 'นักเรียน'],
         },
         {
+          icon: 'mdi-format-list-checkbox',
+          title: 'แบบทดสอบ',
+          to: '/exam',
+          groups: ['นักเรียน'],
+        },
+        {
+          icon: 'mdi-format-list-checks',
+          title: 'แบบทดสอบของฉัน',
+          to: '/exam/my',
+          groups: ['นักเรียน'],
+        },
+        {
           icon: 'mdi-file-document-multiple',
           title: 'จัดการชุดแบบทดสอบ',
           to: '/examset',
