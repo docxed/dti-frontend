@@ -6,7 +6,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="4">
+      <v-col cols="12" sm="6">
         <examsetitem-tag-field
           :data.sync="form.category_id"
           :rules="[$rules.required]"
@@ -15,11 +15,11 @@
         />
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
+    <v-row justify="center">
+      <v-col cols="6" sm="4">
         <v-btn block @click="$emit('close')">ยกเลิก</v-btn>
       </v-col>
-      <v-col>
+      <v-col cols="6" sm="4">
         <v-btn block color="success" type="submit" :loading="loading">บันทึก</v-btn>
       </v-col>
     </v-row>

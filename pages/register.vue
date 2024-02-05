@@ -20,7 +20,7 @@
               label="คะแนนระดับความฉลาดทางดิจิทัล DQ"
             />
             <p class="text-caption">
-              คะแนนระดับความฉลาดทางดิจิทัล <b>DQ</b> สามารถตรวจสอบได้ที่
+              หากไม่มีคะแนนระดับความฉลาดทางดิจิทัล <b>DQ</b> สามารถตรวจสอบได้ที่
               <a href="https://dqassessment.com/th/home" target="_blank">คลิก</a>
             </p>
             <v-row>
@@ -47,12 +47,25 @@
                 />
               </v-col>
             </v-row>
-            <v-text-field
-              v-model="form.school"
-              :rules="[$rules.required, $rules.maxlength(255)]"
-              prepend-icon="mdi-school"
-              label="โรงเรียน"
-            />
+            <v-row>
+              <v-col cols="4" sm="4">
+                <v-select
+                  v-model="form.gender"
+                  :rules="[$rules.required]"
+                  :items="genderItem"
+                  label="เพศ"
+                />
+              </v-col>
+              <v-col cols="8" sm="8">
+                <v-text-field
+                  v-model="form.school"
+                  :rules="[$rules.required, $rules.maxlength(255)]"
+                  prepend-icon="mdi-school"
+                  label="โรงเรียน"
+                />
+              </v-col>
+            </v-row>
+
             <v-text-field
               v-model="form.password"
               :rules="[$rules.required, $rules.password, $rules.maxlength(20)]"
@@ -90,10 +103,7 @@
             </v-row>
             <div v-if="isMore">
               <v-row>
-                <v-col cols="12" sm="2">
-                  <v-select v-model="form.gender" :items="genderItem" label="เพศ" />
-                </v-col>
-                <v-col cols="6" sm="5">
+                <v-col cols="6" sm="6">
                   <form-date-field
                     :value.sync="form.birthday"
                     @input="form.birthday = $event"
@@ -101,7 +111,7 @@
                     label="วันเกิด"
                   />
                 </v-col>
-                <v-col cols="6" sm="5">
+                <v-col cols="6" sm="6">
                   <v-text-field
                     v-model="form.phone"
                     :rules="[$rules.maxlength(10), $rules.phone]"

@@ -25,6 +25,7 @@
               examsetDetail = item
             "
           >
+            <v-icon left>mdi-information</v-icon>
             รายละเอียด
           </v-btn>
         </td></template

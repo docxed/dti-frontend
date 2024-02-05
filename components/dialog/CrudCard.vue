@@ -11,7 +11,8 @@
       <v-form ref="form" v-model="valid" @submit.prevent="onCreate()" lazy-validation>
         <v-text-field
           v-model="text"
-          :rules="[$rules.required, $rules.maxlength(100)]"
+          :rules="[$rules.required, $rules.maxlength(255)]"
+          counter="255"
           label="ชื่อ"
           filled
           dense
@@ -36,7 +37,8 @@
               >
                 <v-text-field
                   v-model="textEdit"
-                  :rules="[$rules.required, $rules.maxlength(100)]"
+                  :rules="[$rules.required, $rules.maxlength(255)]"
+                  counter="255"
                   label="ชื่อ"
                   filled
                   dense

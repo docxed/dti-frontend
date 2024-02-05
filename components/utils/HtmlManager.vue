@@ -33,7 +33,25 @@ export default {
       blotFormatter: {
         specs: [CustomImageSpec],
       },
-      imageUploader: {},
+      imageUploader: {
+        upload: (file) => {
+          return new Promise(async (resolve, reject) => {
+            try {
+              const formData = new FormData()
+              formData.append('file', file)
+              const response = await this.$axios.post(`/file`, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              })
+              const url = `${this.$baseURL}/file/media/${response.data.key}`
+              resolve(url)
+            } catch {
+              reject(false)
+            }
+          })
+        },
+      },
     }
   },
 }

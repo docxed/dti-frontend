@@ -85,7 +85,7 @@
       </v-menu>
     </v-app-bar>
     <v-main>
-      <v-container>
+      <v-container fluid>
         <dialog-form :value.sync="dialogEditUser" title="ข้อมูลส่วนตัว">
           <user-form @close="dialogEditUser = false" />
         </dialog-form>
