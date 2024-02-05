@@ -44,7 +44,7 @@ export default {
                   'Content-Type': 'multipart/form-data',
                 },
               })
-              const url = `${this.$baseURL}/file/media/${response.data.key}`
+              const url = `${this.$config.prodURL}/file/media/${response.data.key}`
               resolve(url)
             } catch {
               reject(false)

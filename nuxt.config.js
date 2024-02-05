@@ -68,6 +68,7 @@ export default {
     contact_password: process.env.NUXT_ENV_CONTACT_PASSWORD,
     baseURL: process.env.NUXT_ENV_BASE_URL,
     node_env: process.env.NODE_ENV,
+    prodURL: process.env.NUXT_ENV_PROD_URL,
   },
 
   auth: {
