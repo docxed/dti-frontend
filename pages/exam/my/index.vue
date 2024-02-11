@@ -5,12 +5,13 @@
       :loading="loading"
       :search="searchText"
       :headers="headers"
-      :items="enrolls"
+      :items="filteredItems"
+      :has-search="false"
       @click-search="search()"
     >
-      <template v-slot:report-form>
-        <v-row>
-          <v-col>
+      <template v-slot:divider>
+        <v-row justify="end">
+          <v-col cols="12" sm="6">
             <v-text-field v-model="searchText" label="ค้นหา" clearable />
           </v-col>
         </v-row>
@@ -26,10 +27,11 @@
         </td>
       </template>
       <template v-slot:td-max_attempt="{ item }">
-        <td>{{ item.examset.max_attempt }}</td>
+        <td>{{ item.attempt }}/{{ item.examset.max_attempt }}</td>
       </template>
       <template v-slot:td-action="{ item }">
         <td>
+          <v-chip color="success" small v-if="item.is_evaluated"> เสร็จสิ้น </v-chip>
           <v-btn
             color="primary"
             small
@@ -37,6 +39,7 @@
               enrollDetail = item
               dialogDetail = true
             "
+            v-else
             ><v-icon left>mdi-information</v-icon>รายละเอียด</v-btn
           >
         </td>
@@ -68,6 +71,11 @@ export default {
     }
   },
   computed: {
+    filteredItems() {
+      return this.enrolls.filter((item) => {
+        return item.examset.is_published
+      })
+    },
     headers() {
       return [
         {
@@ -84,7 +92,7 @@ export default {
           value: 'time',
         },
         {
-          text: 'จำนวนครั้งที่สามารถทำได้',
+          text: 'จำนวนครั้งที่สอบ',
           value: 'max_attempt',
         },
         {

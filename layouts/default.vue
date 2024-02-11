@@ -128,9 +128,21 @@ export default {
           groups: ['นักเรียน'],
         },
         {
+          icon: 'mdi-format-list-checks',
+          title: 'ประเมินแบบทดสอบ',
+          to: '/evaluate/my',
+          groups: ['ครู'],
+        },
+        {
           icon: 'mdi-file-document-multiple',
           title: 'จัดการชุดแบบทดสอบ',
           to: '/examset',
+          groups: ['แอดมิน'],
+        },
+        {
+          icon: 'mdi-chart-box-plus-outline',
+          title: 'รายงานชุดแบบทดสอบ',
+          to: '/report/examset',
           groups: ['แอดมิน'],
         },
       ],

@@ -1,13 +1,23 @@
 <template>
   <div>
-    <v-row justify="end">
+    <v-row justify="end" class="mt-1">
       <v-col cols="12" sm="4">
         <v-btn block color="success" @click="dialogCreateExamsetitem = true"
           ><v-icon left>mdi-plus</v-icon>เพิ่มโจทย์</v-btn
         >
       </v-col>
     </v-row>
-    <utils-data-table class="mt-3" :headers="examsetitemHeaders" :items="examsetitems">
+    <v-row justify="end">
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="searchText" label="ค้นหา" clearable />
+      </v-col>
+    </v-row>
+    <utils-data-table
+      class="mt-3"
+      :headers="examsetitemHeaders"
+      :items="examsetitems"
+      :search="searchText"
+    >
       <template v-slot:td-question="{ item }">
         <td>
           <v-quill-viewer :data="truncateString(item.question, 50)" />
@@ -15,9 +25,10 @@
       </template>
       <template v-slot:td-category.name="{ item }">
         <td>
-          {{ item.category.name }}
+          <v-chip color="light" label> {{ item.category.name }}</v-chip>
         </td>
       </template>
+
       <template v-slot:td-action="{ item }">
         <td>
           <v-btn
@@ -73,6 +84,7 @@ export default {
   },
   data() {
     return {
+      searchText: null,
       dialogCreateExamsetitem: false,
       loadingExamsetitem: false,
       examsetitems: [],
@@ -92,6 +104,10 @@ export default {
           text: 'แก้ไขเมื่อ',
           value: 'update_date',
           type: 'datetime',
+        },
+        {
+          text: 'ข้อที่',
+          value: 'no',
         },
         {
           text: 'โจทย์',

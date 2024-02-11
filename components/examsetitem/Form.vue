@@ -1,6 +1,18 @@
 <template>
   <v-form ref="form" v-model="valid" @submit.prevent="onSubmit()" lazy-validation>
     <v-row>
+      <v-col cols="6" sm="3">
+        <v-text-field
+          type="number"
+          v-model="form.no"
+          :rules="[$rules.required, $rules.numeric, $rules.more_than_zero]"
+          label="ข้อที่"
+          min="1"
+          filled
+        />
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col>
         <utils-html-manager :text.sync="form.question" />
       </v-col>
@@ -51,6 +63,7 @@ export default {
       valid: false,
       loading: false,
       form: {
+        no: null,
         question: '',
         category_id: null,
       },
@@ -58,6 +71,7 @@ export default {
   },
   methods: {
     setItem() {
+      this.form.no = this.updateItem.no
       this.form.question = this.updateItem.question
       this.form.category_id = this.updateItem.category.id
     },

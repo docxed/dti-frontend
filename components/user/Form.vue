@@ -45,7 +45,12 @@
     />
     <v-row>
       <v-col cols="12" sm="2">
-        <v-select v-model="form.gender" :items="genderItem" label="เพศ" />
+        <v-select
+          v-model="form.gender"
+          :rules="[$rules.required]"
+          :items="genderItem"
+          label="เพศ"
+        />
       </v-col>
       <v-col cols="6" sm="5">
         <form-date-field

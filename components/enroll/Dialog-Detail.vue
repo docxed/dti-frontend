@@ -3,7 +3,6 @@
     <p><strong>รายละเอียด</strong> <v-quill-viewer :data="enroll.examset.description" /></p>
     <p><strong>เวลาทำ</strong> {{ enroll.examset.time }} นาที</p>
     <p><strong>จำนวนครั้งที่สามารถทำได้</strong> {{ enroll.examset.max_attempt }} ครั้ง</p>
-
     <p>
       <strong>จำนวนข้อ</strong>
       <v-progress-circular indeterminate color="primary" size="24" v-if="loadingExamsetitem" />
@@ -11,12 +10,7 @@
     </p>
     <v-row justify="center">
       <v-col cols="12" sm="4">
-        <v-btn
-          block
-          color="success"
-          @click="startEnroll()"
-          v-if="!isEnrollTimeOut(enroll.start_datetime, enroll.end_datetime)"
-        >
+        <v-btn block color="success" @click="startEnroll()">
           <v-icon left>mdi-play</v-icon>เริ่มทำแบบทดสอบ</v-btn
         >
       </v-col>
@@ -62,7 +56,7 @@ export default {
     isEnrollTimeOut(start, end) {
       // use this.$moment
       const now = this.$moment()
-      return now.isBefore(start) || now.isAfter(end)
+      return now.isAfter(end)
     },
   },
 }

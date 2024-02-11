@@ -43,9 +43,11 @@
           </v-card>
         </v-tab-item>
         <v-tab-item key="student">
-          <examsetitem-student-list :examsetId="this.$route.params.id" />
+          <examsetitem-student-list :examsetId="this.$route.params.id" hideAction />
         </v-tab-item>
-        <v-tab-item key="teacher"></v-tab-item>
+        <v-tab-item key="teacher">
+          <examsetitem-teacher-list :examsetId="this.$route.params.id" />
+        </v-tab-item>
       </v-tabs-items>
     </v-card>
 

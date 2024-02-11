@@ -83,6 +83,8 @@ export default {
         const { data } = await this.$axios.post(`/enroll`, {
           examset_id: this.examset.id,
         })
+        this.$toast.success('เริ่มทำแบบทดสอบ')
+        this.$router.replace(`/exam/my/${data.id}`)
       } catch (err) {
       } finally {
         this.loadingCreateEnroll = false
