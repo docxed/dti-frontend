@@ -128,6 +128,18 @@ export default {
           groups: ['นักเรียน'],
         },
         {
+          icon: 'mdi-file-document',
+          title: 'แบบสอบถามก่อนทำ',
+          to: '/questionnaire?type=ก่อน',
+          groups: ['นักเรียน'],
+        },
+        {
+          icon: 'mdi-file-document-check',
+          title: 'แบบสอบถามหลังทำ',
+          to: '/questionnaire?type=หลัง',
+          groups: ['นักเรียน'],
+        },
+        {
           icon: 'mdi-format-list-checks',
           title: 'ประเมินแบบทดสอบ',
           to: '/evaluate/my',
@@ -143,6 +155,24 @@ export default {
           icon: 'mdi-chart-box-plus-outline',
           title: 'รายงานชุดแบบทดสอบ',
           to: '/report/examset',
+          groups: ['แอดมิน'],
+        },
+        {
+          icon: 'mdi-chart-box-plus-outline',
+          title: 'รายงานแบบสอบถาม',
+          to: '/report/review',
+          groups: ['แอดมิน'],
+        },
+        {
+          icon: 'mdi-account-group',
+          title: 'เพิ่มผู้ใช้ครู',
+          to: '/user',
+          groups: ['แอดมิน'],
+        },
+        {
+          icon: 'mdi-file-document-check',
+          title: 'แบบสอบถามก่อน/หลัง',
+          to: '/review',
           groups: ['แอดมิน'],
         },
       ],

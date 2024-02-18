@@ -195,6 +195,17 @@ export default {
             enrollitems,
           })
           this.$toast.success('ส่งคำตอบสำเร็จ')
+          // check review
+          const { data: reviewsets } = await this.$axios.get(`/reviewset`, {
+            params: {
+              type: 'หลัง',
+              user_id: this.$auth.user.id,
+            },
+          })
+          if (reviewsets.length === 0) {
+            this.$toast.success('กรุณาทำแบบสอบถามหลังทำแบบทดสอบ')
+            return this.$router.push('/questionnaire?type=หลัง')
+          }
           this.$router.push('/exam/my')
         } catch (err) {
         } finally {

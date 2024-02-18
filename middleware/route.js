@@ -1,5 +1,5 @@
 export default ({ $auth, route, redirect }) => {
-  const adminPages = ['/admin', '/examset', '/report']
+  const adminPages = ['/admin', '/examset', '/report', '/user', '/review']
   const studentPages = ['/exam']
   const teacherPages = ['/evaluate']
   if (adminPages.some((page) => route.path.startsWith(page))) {

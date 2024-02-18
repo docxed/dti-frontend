@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" sm="8" lg="6">
-      <v-row justify="center">
+      <v-row justify="center" class="mb-2">
         <v-col>
           <v-img src="/favicon.ico" class="mx-auto" width="30%" />
         </v-col>

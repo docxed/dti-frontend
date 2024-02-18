@@ -31,7 +31,17 @@
       </template>
       <template v-slot:td-action="{ item }">
         <td>
-          <v-chip color="success" small v-if="item.is_evaluated"> เสร็จสิ้น </v-chip>
+          <v-chip
+            color="success"
+            small
+            @click="
+              evaluateDetailItem = item
+              dialogEvaluateDetail = true
+            "
+            v-if="item.is_evaluated"
+          >
+            <v-icon small left>mdi-information</v-icon> เสร็จสิ้น
+          </v-chip>
           <v-btn
             color="primary"
             small
@@ -47,6 +57,15 @@
     </utils-base-report>
     <dialog-form :value.sync="dialogDetail" :title="enrollDetail?.examset?.title || ''">
       <enroll-dialog-detail :enroll="enrollDetail" @close="dialogDetail = false" />
+    </dialog-form>
+    <dialog-form
+      :value.sync="dialogEvaluateDetail"
+      :title="`ผลการประเมิน ${evaluateDetailItem?.examset?.title || ''}`"
+    >
+      <exam-dialog-evaluate-detail
+        :item="evaluateDetailItem"
+        @close="dialogEvaluateDetail = false"
+      />
     </dialog-form>
   </div>
 </template>
@@ -68,6 +87,8 @@ export default {
       searchText: null,
       dialogDetail: false,
       enrollDetail: {},
+      dialogEvaluateDetail: false,
+      evaluateDetailItem: {},
     }
   },
   computed: {

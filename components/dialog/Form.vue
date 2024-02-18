@@ -1,9 +1,9 @@
 <template>
   <v-dialog
     :value="value"
-    :scrollable="!$vuetify.breakpoint.xsOnly"
+    :scrollable="!$vuetify.breakpoint.xsOnly && !fullscreen"
     max-width="1200px"
-    :fullscreen="$vuetify.breakpoint.xsOnly"
+    :fullscreen="$vuetify.breakpoint.xsOnly || fullscreen"
     persistent
   >
     <v-card>
@@ -33,6 +33,10 @@ export default {
     title: {
       type: String,
       required: true,
+    },
+    fullscreen: {
+      type: Boolean,
+      default: false,
     },
   },
 }

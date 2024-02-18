@@ -19,13 +19,7 @@
           }}</v-chip>
         </td>
       </template>
-      <template v-slot:td-is_evaluated="{ item }">
-        <td>
-          <v-chip :color="item.is_evaluated ? 'success' : 'secondary'" small>{{
-            item.is_evaluated ? 'ประเมินแล้ว' : 'ยังไม่ประเมิน'
-          }}</v-chip>
-        </td>
-      </template>
+
       <template v-slot:td-attempt="{ item }">
         <td>{{ item.attempt }}/{{ item.examset.max_attempt }}</td>
       </template>
@@ -87,10 +81,7 @@ export default {
           text: 'สถานะการส่ง',
           value: 'is_submitted',
         },
-        {
-          text: 'สถานะการประเมิน',
-          value: 'is_evaluated',
-        },
+
         {
           text: '',
           value: 'action',

@@ -20,19 +20,32 @@
           </v-toolbar>
           <examsetitem-student-list :examsetId="this.evaluate.examset._id" @click-evaluate="">
             <template v-slot:td-action="{ item }">
-              <v-chip color="light" small v-if="item.attempt === 0">รอดำเนินการ</v-chip>
-              <v-chip color="success" small v-else-if="item.is_evaluated">เสร็จสิ้น</v-chip>
-              <v-btn
+              <v-progress-circular
+                indeterminate
                 color="primary"
-                small
-                @click="
-                  $router.push(
-                    `/evaluate/my/${evaluate.id}/enroll/${item.id}/student/${item.user._id}`,
-                  )
-                "
-                v-else
-                ><v-icon left>mdi-text-box-edit</v-icon>ประเมิน</v-btn
-              >
+                size="24"
+                v-if="loadingEvaluateitem"
+              />
+              <span v-else>
+                <v-chip color="light" small v-if="item.attempt === 0">รอดำเนินการ</v-chip>
+                <v-chip
+                  color="success"
+                  small
+                  v-else-if="evaluateitems.map((eva) => eva.enroll_id._id).includes(item.id)"
+                  >เสร็จสิ้น</v-chip
+                >
+                <v-btn
+                  color="primary"
+                  small
+                  @click="
+                    $router.push(
+                      `/evaluate/my/${evaluate.id}/enroll/${item.id}/student/${item.user._id}`,
+                    )
+                  "
+                  v-else
+                  ><v-icon left>mdi-text-box-edit</v-icon>ประเมิน</v-btn
+                >
+              </span>
             </template>
           </examsetitem-student-list>
         </v-card>
@@ -56,12 +69,30 @@ export default {
       title: '',
       loadingExamsetitem: false,
       examsetitems: [],
+      loadingEvaluateitem: false,
+      evaluateitems: [],
     }
   },
   methods: {
     async initialize() {
+      this.fetchEvaluateitem()
       await this.fetch()
       this.fetchExamsetitem()
+    },
+    async fetchEvaluateitem() {
+      try {
+        this.loadingEvaluateitem = true
+        const { data } = await this.$axios.get(`/evaluateitem`, {
+          params: {
+            evaluate_id: this.$route.params.id,
+            del_flag: false,
+          },
+        })
+        this.evaluateitems = data
+      } catch (err) {
+      } finally {
+        this.loadingEvaluateitem = false
+      }
     },
     async fetch() {
       try {

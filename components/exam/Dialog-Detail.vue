@@ -80,6 +80,17 @@ export default {
     async createEnroll() {
       try {
         this.loadingCreateEnroll = true
+        // check review
+        const { data: reviewsets } = await this.$axios.get(`/reviewset`, {
+          params: {
+            type: 'ก่อน',
+            user_id: this.$auth.user.id,
+          },
+        })
+        if (reviewsets.length === 0) {
+          this.$toast.warning('กรุณาทำแบบสอบถามก่อนทำแบบทดสอบ')
+          return this.$router.push('/questionnaire?type=ก่อน')
+        }
         const { data } = await this.$axios.post(`/enroll`, {
           examset_id: this.examset.id,
         })

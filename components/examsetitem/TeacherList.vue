@@ -139,6 +139,7 @@ export default {
         this.selectedTeacher = null
         this.dialogCreateEvaluate = false
         this.evaluates.unshift(data)
+        this.$toast.success('เพิ่มผู้ประเมินสำเร็จ')
       } catch (err) {
       } finally {
         this.laodingCreateEvaluate = false
@@ -150,6 +151,7 @@ export default {
           this.$loader.show()
           await this.$axios.delete(`/evaluate/${item.id}`)
           this.evaluates.splice(this.evaluates.indexOf(item), 1)
+          this.$toast.success('ลบผู้ประเมินสำเร็จ')
         } catch (err) {
         } finally {
           this.$loader.hide()

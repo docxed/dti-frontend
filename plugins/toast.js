@@ -4,5 +4,5 @@ import Vue from 'vue'
 
 Vue.use(Toast, {
   position: 'top-right',
-  duration: 5000,
+  duration: 8000,
 })

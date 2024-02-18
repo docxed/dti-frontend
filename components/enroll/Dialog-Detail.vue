@@ -51,6 +51,17 @@ export default {
       }
     },
     async startEnroll() {
+      // check review
+      const { data: reviewsets } = await this.$axios.get(`/reviewset`, {
+        params: {
+          type: 'ก่อน',
+          user_id: this.$auth.user.id,
+        },
+      })
+      if (reviewsets.length === 0) {
+        this.$toast.warning('กรุณาทำแบบสอบถามก่อนทำแบบทดสอบ')
+        return this.$router.push('/questionnaire?type=ก่อน')
+      }
       return this.$router.push(`/exam/my/${this.enroll.id}`)
     },
     isEnrollTimeOut(start, end) {
