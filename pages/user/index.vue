@@ -105,6 +105,7 @@ export default {
         { text: 'โรงเรียน', value: 'school' },
         { text: 'เพศ', value: 'gender' },
         { text: 'คะแนน DQ', value: 'dq_score', align: 'right' },
+        { text: 'เกรดวิทยาการคำนวณม.2', value: 'm2_score', align: 'right' },
         { text: 'กลุ่ม', value: 'groups' },
         { text: '', value: 'action', sortable: false },
       ]

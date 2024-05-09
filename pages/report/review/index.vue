@@ -18,6 +18,7 @@
               label="นักเรียน"
               item-text="fullname_with_school"
               item-value="id"
+              return-object
               filled
             />
           </v-col>
@@ -90,6 +91,7 @@ export default {
         'โรงเรียน',
         'เพศ',
         'คะแนน DQ',
+        'เกรดวิทยาการคำนวณม.2',
         'ประเภท',
         'รายการประเมิน',
         'ผลประเมิน',
@@ -100,6 +102,7 @@ export default {
           review.user_id.school,
           review.user_id.gender === 'M' ? 1 : 2,
           review.user_id.dq_score,
+          review.user_id.m2_score,
           review.type,
           review.question,
           review.answer,
@@ -123,7 +126,7 @@ export default {
         const { data } = await this.$axios.get('/report/reviewset', {
           params: {
             type: this.type,
-            user_id: this.user_id,
+            user_id: this.user_id.id,
           },
         })
         this.items = data

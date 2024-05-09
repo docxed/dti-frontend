@@ -167,7 +167,7 @@ export default {
       wsData.push(['โรงเรียน', item.school])
       wsData.push(['จำนวนนักเรียน', item.evaluates.length])
       for (const evaluate of item.evaluates) {
-        let rowOfStudent = ['นักเรียน', 'โรงเรียน', 'เพศ', 'คะแนน DQ']
+        let rowOfStudent = ['นักเรียน', 'โรงเรียน', 'เพศ', 'คะแนน DQ', 'เกรดวิทยาการคำนวณม.2']
         for (const ev of evaluate.evs) {
           rowOfStudent.push(`ข้อที่ ${ev.question_no}`)
         }
@@ -177,6 +177,7 @@ export default {
         rowOfStudent.push(evaluate.enroll.school)
         rowOfStudent.push(evaluate.enroll.gender)
         rowOfStudent.push(evaluate.enroll.dq_score)
+        rowOfStudent.push(evaluate.enroll.m2_score)
         for (const ev of evaluate.evs) {
           rowOfStudent.push(ev.score)
         }

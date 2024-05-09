@@ -13,6 +13,17 @@
       :rules="[$rules.required_zero_allow, $rules.number]"
       label="คะแนนระดับความฉลาดทางดิจิทัล DQ"
     />
+    <v-text-field
+      v-model="form.m2_score"
+      type="number"
+      :rules="[
+        $rules.required_zero_allow,
+        $rules.number,
+        $rules.number_gte(0),
+        $rules.number_lte(4),
+      ]"
+      label="เกรดเฉลี่ยรายวิชาวิทยาการคำนวณตอนม.2"
+    />
     <v-row>
       <v-col cols="12" sm="2">
         <v-select
@@ -98,6 +109,7 @@ export default {
     return {
       form: {
         dq_score: 0,
+        m2_score: 0,
         prefix: 'นาย',
         firstname: '',
         lastname: '',
