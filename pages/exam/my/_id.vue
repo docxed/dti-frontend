@@ -52,7 +52,7 @@
                     <v-icon small>mdi-check</v-icon>
                   </span>
                   <span v-else>
-                    {{ index + 1 }}
+                    {{ question.no }}
                   </span>
                 </v-chip>
               </v-col>
@@ -138,6 +138,7 @@
   </div>
 </template>
 <script>
+import { orderBy } from 'lodash'
 export default {
   head() {
     return {
@@ -230,12 +231,16 @@ export default {
           enroll_id: enroll.id,
         })
         this.enroll = enroll
-        this.examsetitems = examsetitems.map((item) => {
-          return {
-            ...item,
-            answer: [],
-          }
-        })
+        this.examsetitems = orderBy(
+          examsetitems.map((item) => {
+            return {
+              ...item,
+              answer: [],
+            }
+          }),
+          ['no'],
+          ['asc'],
+        )
         this.title = enroll.examset.title
       } catch (err) {
         this.$router.replace('/exam/my')
