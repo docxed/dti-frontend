@@ -29,7 +29,7 @@
                     <v-icon small>mdi-check</v-icon>
                   </span>
                   <span v-else>
-                    {{ index + 1 }}
+                    {{ question.no }}
                   </span>
                 </v-chip>
               </v-col>
@@ -147,6 +147,7 @@
 </template>
 <script>
 import { truncateString } from '~/utils/format'
+import { orderBy } from 'lodash'
 export default {
   head() {
     return {
@@ -220,14 +221,18 @@ export default {
             del_flag: false,
           },
         })
-        this.enrollitems = data.map((item, index) => ({
-          ...item,
-          no: index + 1,
-          evaluate: {
-            score: item.answer ? null : 0,
-            comment: item.answer ? '' : 'ไม่ได้ตอบ',
-          },
-        }))
+        this.enrollitems = orderBy(
+          data.map((item, index) => ({
+            ...item,
+            no: item.examsetitem.no,
+            evaluate: {
+              score: item.answer ? null : 0,
+              comment: item.answer ? '' : 'ไม่ได้ตอบ',
+            },
+          })),
+          ['no'],
+          ['asc'],
+        )
         this.title = `${this.enrollitems[0].user.prefix} ${this.enrollitems[0].user.firstname} ${this.enrollitems[0].user.lastname} (${this.enrollitems[0].user.school})`
       } catch (err) {
         console.error(err)
