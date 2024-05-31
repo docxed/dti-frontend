@@ -28,10 +28,7 @@
               />
               <span v-else>
                 <v-chip color="light" small v-if="item.attempt === 0">รอดำเนินการ</v-chip>
-                <v-chip
-                  color="success"
-                  small
-                  v-else-if="evaluateitems.map((eva) => eva.enroll_id._id).includes(item.id)"
+                <v-chip color="success" small v-else-if="evaluateitems.includes(item.id)"
                   >เสร็จสิ้น</v-chip
                 >
                 <v-btn
@@ -82,7 +79,7 @@ export default {
     async fetchEvaluateitem() {
       try {
         this.loadingEvaluateitem = true
-        const { data } = await this.$axios.get(`/evaluateitem`, {
+        const { data } = await this.$axios.get(`/evaluateitem/distinct`, {
           params: {
             evaluate_id: this.$route.params.id,
             del_flag: false,

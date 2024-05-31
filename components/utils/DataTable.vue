@@ -18,6 +18,9 @@
       :sort-desc.sync="pagination.descending"
       :itemsPerPage.sync="pagination.itemsPerPage"
       checkbox-color="primary"
+      :footer-props="{
+        'items-per-page-options': [10, 20, 30, 40, 50],
+      }"
       @input="$emit('update:selected', $event)"
     >
       <template v-slot:item="props">

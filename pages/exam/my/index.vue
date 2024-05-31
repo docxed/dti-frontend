@@ -134,7 +134,7 @@ export default {
             del_flag: false,
           },
         })
-        this.enrolls = data
+        this.enrolls = data.results
       } catch (err) {
       } finally {
         this.loading = false

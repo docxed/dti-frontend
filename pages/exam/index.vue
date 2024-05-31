@@ -96,7 +96,7 @@ export default {
           },
         })
         this.examsets = data.filter((examset) => {
-          return !examsetme.find((item) => item.examset._id === examset.id)
+          return !examsetme.results.find((item) => item.examset._id === examset.id)
         })
       } catch (err) {
       } finally {
