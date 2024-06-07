@@ -6,6 +6,11 @@
       </v-toolbar-title>
     </v-toolbar>
     <v-data-table
+      :footer-props="{
+        'items-per-page-options': $attrs.hasOwnProperty('server-items-length')
+          ? [50]
+          : [10, 20, 50, 100],
+      }"
       v-bind="$attrs"
       :headers="headers"
       :items="resultItems"
@@ -18,9 +23,6 @@
       :sort-desc.sync="pagination.descending"
       :itemsPerPage.sync="pagination.itemsPerPage"
       checkbox-color="primary"
-      :footer-props="{
-        'items-per-page-options': [10, 20, 30, 40, 50],
-      }"
       @input="$emit('update:selected', $event)"
     >
       <template v-slot:item="props">

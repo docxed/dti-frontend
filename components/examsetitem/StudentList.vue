@@ -64,9 +64,9 @@ export default {
       enrolls_count: 0,
       pagination: {
         page: 1,
-        itemsPerPage: 10,
+        itemsPerPage: 50,
         sortBy: [],
-        descending: false,
+        descending: undefined,
       },
     }
   },
@@ -146,7 +146,7 @@ export default {
             skip: (page - 1) * itemsPerPage,
             limit: itemsPerPage,
             sortBy: sortBy,
-            sortDesc: descending ? -1 : 1,
+            sortDesc: descending,
           },
         })
         this.enrolls = data.results
